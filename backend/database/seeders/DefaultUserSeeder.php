@@ -17,9 +17,10 @@ class DefaultUserSeeder extends Seeder
     public function run()
     {
         User::updateOrCreate(
-            ['email' => 'admin@admin.com'],
+            ['email' => 'admin@admin'],
             [
-                'name' => 'Admin',
+                'first_name' => 'Admin',
+                'last_name' => 'Teste',
                 'password' => Hash::make('123'),
             ]
         );

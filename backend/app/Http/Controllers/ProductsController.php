@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Http\Controllers\Controller;
+use App\Models\ProductImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 class ProductsController extends Controller
 {
@@ -15,7 +18,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Products::paginate(10);
+        return response()->json($products);
     }
 
     /**
@@ -23,9 +27,33 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return $request;
+        $descriptionSanitize = Purifier::clean($request->input('description'), 'custom');
+
+        $product = Products::create([
+            'title' => $request->input('title'),
+            'sale_price' => $request->input('sale_price'),
+            'cost_price' => $request->input('cost_price'),
+            'description' => $descriptionSanitize,
+            'is_active' => true,
+        ]);
+
+        if($request->file){
+            foreach ($request->file('images', []) as $imagem) {
+                $path = $imagem->store('produtos', 'public');
+                $url = asset(Storage::url($path));
+
+                ProductImages::create([
+                    'product_id' => $product->id,
+                    'image_path' => $path,
+                    'url' => $url,
+                ]);
+            }
+        }
+
+        return response()->json($product, 201);
     }
 
     /**

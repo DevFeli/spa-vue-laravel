@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
+# # Ajusta limites de upload diretamente no PHP
+# RUN echo "upload_max_filesize=10M\npost_max_size=12M" > /usr/local/etc/php/conf.d/uploads.ini
+
 # Instala o Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

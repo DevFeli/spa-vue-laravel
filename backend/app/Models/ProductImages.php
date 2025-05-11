@@ -17,6 +17,7 @@ class ProductImages extends Model
     protected $fillable = [
         'product_id',
         'image_path',
+        'url',
     ];
 
     public function product()
