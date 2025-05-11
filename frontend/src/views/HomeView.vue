@@ -21,7 +21,7 @@ async function teste(){
 
 <template>
   <main>
-    <h1>teste</h1>
+    <h1 class="text-red-500">teste 1</h1>
     <button @click="teste">Api</button>
   </main>
 </template>
