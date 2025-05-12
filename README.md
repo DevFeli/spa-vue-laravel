@@ -204,5 +204,5 @@ Validação de regras de negócio
 Para rodar:
 ```bash 
 docker exec -it laravel_app bash
-php artisan test
+php artisan test --env=testing
 ```
