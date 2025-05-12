@@ -87,7 +87,10 @@ Preço de venda ≥ custo + 10%
 
 Apenas imagens .jpg e .png são permitidas
 
-O campo de descrição aceita apenas tags HTML: <p>, <br>, <b>, <strong>
+O campo de descrição aceita apenas tags HTML: 
+```bash 
+<p>, <br>, <b>, <strong>
+```
 
 # Usuários
 Login com autenticação (JWT)
@@ -126,7 +129,10 @@ Preço de venda
 
 Custo
 
-Descrição (HTML limitado a <p>, <br>, <b>, <strong>)
+Descrição HTML limitado a
+```bash 
+( <p>, <br>, <b>, <strong>)
+```
 
 Validações:
 
@@ -196,5 +202,7 @@ Testes unitários com PHPUnit
 Validação de regras de negócio
 
 Para rodar:
+```bash 
 docker exec -it laravel_app bash
 php artisan test
+```
