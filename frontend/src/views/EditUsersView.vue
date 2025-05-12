@@ -56,7 +56,7 @@
           class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full font-semibold transition-all duration-300"
           :disabled="loading"
         >
-          {{ loading ? "Salvando..." : "Salvar Produto" }}
+          {{ loading ? "Salvando..." : "Editar usuário" }}
         </button>
 
         <div v-if="error" class="text-red-400 text-center mt-4">

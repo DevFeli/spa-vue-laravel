@@ -2,9 +2,9 @@
   <div class="bg-[#1E1E1E] h-screen">
     <Menu />
     <div class="px-8 py-6 text-white">
-      <h2 class="text-3xl font-bold text-center mb-2">Adicionar Produto</h2>
+      <h2 class="text-3xl font-bold text-center mb-2">Adicionar Usuário</h2>
       <p class="text-center text-gray-300 mb-8">
-        Preencha os dados abaixo para cadastrar um novo produto
+        Preencha os dados abaixo para cadastrar um novo usuário
       </p>
 
       <form
@@ -56,7 +56,7 @@
           class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full font-semibold transition-all duration-300"
           :disabled="loading"
         >
-          {{ loading ? "Salvando..." : "Salvar Produto" }}
+          {{ loading ? "Salvando..." : "Salvar usuário" }}
         </button>
 
         <div v-if="error" class="text-red-400 text-center mt-4">
