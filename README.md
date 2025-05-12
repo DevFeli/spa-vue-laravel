@@ -82,6 +82,14 @@ Edição de produtos
 
 Inativação de produtos
 
+Listagem de usuários
+
+Cadastro de usuários
+
+Edição de usuários
+
+Listagem de logs
+
 # Validações
 Preço de venda ≥ custo + 10%
 
@@ -98,7 +106,7 @@ Login com autenticação (JWT)
 CRUD de usuários (diferencial implementado)
 
 # Logs
-Registro de criação e modificação de produtos
+Registro de criação e modificação de produtos, usuários e imagens
 
 👤 Manual do Usuário
 
@@ -129,6 +137,18 @@ Preço de venda
 
 Custo
 
+4. Cadastro / Edição de Usuário
+
+Nome
+
+Sobrenome
+
+Email
+
+Senha
+
+5. Listagem de Logs
+
 Descrição HTML limitado a
 ```bash 
 ( <p>, <br>, <b>, <strong>)
@@ -142,7 +162,7 @@ HTML limitado nas descrições e sanitizado no front e no back
 
 Além de outras validações simples de input
 
-4. Inativar Produto
+6. Inativar Produto
 Produtos podem ser inativados ao invés de deletados.
 
 Inativos aparecem ao final da listagem (TODO implementar filtros 'ativos/inativos').
@@ -207,8 +227,11 @@ Para rodar:
 docker exec -it laravel_app bash
 php artisan test --env=testing
 ```
-#Pontos a melhorar
+#Pontos a melhorar:
+
 FrontEnd
 
 Algumas funções se repetiram em componentes portanto devem ser encapsuladas em services para que não se repitam respeitando o padrão DRY (Don't Repeat Yourself)
 Alguns componentes poderiam ser mais genéricos para serem reapriveitados.
+
+
