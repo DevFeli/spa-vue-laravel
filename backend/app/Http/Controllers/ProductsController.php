@@ -8,6 +8,7 @@ use App\Models\ProductImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
+use App\Services\Products\ProductService;
 
 class ProductsController extends Controller
 {
@@ -18,7 +19,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::with('images')->paginate(10);
+        $products = Products::with('images')->orderBy('is_active', 'DESC')->paginate(10);
         return response()->json($products);
     }
 
@@ -39,17 +40,8 @@ class ProductsController extends Controller
             'is_active' => true,
         ]);
 
-        if($request->file('images')){
-            foreach ($request->file('images', []) as $imagem) {
-                $path = $imagem->store('produtos', 'public');
-                $url = asset(Storage::url($path));
-
-                ProductImages::create([
-                    'product_id' => $product->id,
-                    'image_path' => $path,
-                    'url' => $url,
-                ]);
-            }
+        if ($request->file('images')) {
+            ProductService::handleCreateImages($request->file('images'), $product->id);
         }
 
         return response()->json($product, 201);
@@ -78,14 +70,36 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Request $request)
     {
-        //
+        $product = Products::where('id', $request->id)->first();
+
+        if ($product) {
+
+            $descriptionSanitize = Purifier::clean($request->input('description'), 'custom');
+
+            $product->update(
+                [
+                    'title' => $request->input('title'),
+                    'sale_price' => $request->input('sale_price'),
+                    'cost_price' => $request->input('cost_price'),
+                    'description' => $descriptionSanitize,
+                    'is_active' => true,
+                ]
+            );
+
+            if ($request->file('images')) {
+                ProductService::handleCreateImages($request->file('images'), $product->id);
+            }
+            return response()->json($product, 200);
+        }
+        return response()->json(['message' => 'Produto não encontrado'], 404);
     }
 
     /**
@@ -99,7 +113,7 @@ class ProductsController extends Controller
     {
         $product = Products::where('id', $request->id)->first();
 
-        if($product){
+        if ($product) {
             $product->update(['is_active' => $request->is_active]);
             return response()->json($product, 200);
         }

@@ -2,7 +2,14 @@
   <tr class="border-t border-[#444] text-white hover:bg-[#383838]">
     <td class="p-3">
       <img
+        v-if="product.images[0]?.url"
         :src="product.images[0]?.url"
+        alt="Imagem do produto"
+        class="w-16 h-16 object-cover rounded"
+      />
+      <img
+        v-else
+        :src="notImageIcon"
         alt="Imagem do produto"
         class="w-16 h-16 object-cover rounded"
       />
@@ -35,6 +42,7 @@ import apiService from "@/services/apiService";
 import { useProductStore } from "@/stores/product.js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import notImageIcon from '@/components/icons/not-image.png'
 const router = useRouter();
 const productStore = useProductStore();
 

@@ -79,8 +79,12 @@ class ProductImagesController extends Controller
      * @param  \App\Models\ProductImages  $productImages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductImages $productImages)
+    public function destroy(ProductImages $image)
     {
-        //
+        if($image){
+            $image->delete();
+            return response()->json(['message' => 'Imagem excluida com sucesso!'], 200);
+        }
+        return response()->json(['message' => 'Imagem não encontrado'], 404);
     }
 }

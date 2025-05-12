@@ -39,5 +39,17 @@ trait LogsChanges
                 'user_id'    => auth()->check() ? auth()->id() : null,
             ]);
         });
+
+        static::deleting(function ($model) {
+            Logs::create([
+                'action'     => 'delete',
+                'route'      => request()->fullUrl(),
+                'model_type' => get_class($model),
+                'model_id'   => $model->id,
+                'old_values' => json_encode($model->getOriginal()),
+                'new_values' => null,
+                'user_id'    => auth()->check() ? auth()->id() : null,
+            ]);
+        });
     }
 }

@@ -34,8 +34,8 @@ class ApiService {
         return response
     }
 
-    async delete(url, data) {
-        const response = await http.delete(url, data, {
+    async delete(url) {
+        const response = await http.delete(url,{
             headers: {
                 Authorization: `Bearer ${this.token}`
             }
@@ -45,6 +45,16 @@ class ApiService {
 
     async postMidia(url, data) {
         const response = await http.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${this.token}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        return response
+    }
+
+    async updateMidia(url, data) {
+        const response = await http.put(url, data, {
             headers: {
                 Authorization: `Bearer ${this.token}`,
                 'Content-Type': 'multipart/form-data',

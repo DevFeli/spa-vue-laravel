@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductImagesController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/products', [ProductsController::class, 'index']);
     Route::post('/products', [ProductsController::class, 'create']);
     Route::put('/products', [ProductsController::class, 'update']);
+    Route::post('/products/edit', [ProductsController::class, 'edit']);
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::delete('/image/{image}', [ProductImagesController::class, 'destroy']);
 });
 
