@@ -14,30 +14,38 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),
-      meta:{
-        auth:true
+      meta: {
+        auth: true
       }
     },
     {
-    path: '/products/create',
+      path: '/products/create',
       name: 'product-create',
       component: () => import('../views/CreateProductView.vue'),
-      meta:{
-        auth:true
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/products/edit',
+      name: 'product-edit',
+      component: () => import('../views/EditProductView.vue'),
+      meta: {
+        auth: true
       }
     },
   ],
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.meta?.auth){
+  if (to.meta?.auth) {
     const auth = useAuthStore()
-    if(auth.token != '' && auth.user){
+    if (auth.token != '' && auth.user) {
       next()
-    }else{
-      next({name:'login'})
+    } else {
+      next({ name: 'login' })
     }
-  }else{
+  } else {
     next()
   }
 })

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LogsChanges;
 
 class Products extends Model
 {
-    use HasFactory;
-
+    use HasFactory, LogsChanges;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +25,6 @@ class Products extends Model
 
     public function images()
     {
-        return $this->hasMany(ProductImages::class);
+        return $this->hasMany(ProductImages::class, 'product_id');
     }
 }

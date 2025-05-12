@@ -93,17 +93,10 @@
 import Menu from "@/components/menu/MenuDashboard.vue";
 import { ref } from "vue";
 import apiService from "@/services/apiService";
-import axios from 'axios';
-import { useAuthStore } from '@/stores/auth.js'
-const authStore = useAuthStore()
-
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost/api',
-    headers:{
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${authStore.token}`,
-    }
-})
+import { useAuthStore } from "@/stores/auth.js";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const authStore = useAuthStore();
 
 const form = ref({
   name: "",
@@ -160,7 +153,7 @@ function sanitizeHtml() {
 }
 
 async function submitForm() {
-    console.log("Imagens:", form.value.images);
+  console.log("Imagens:", form.value.images);
   if (!handleValidatePrice()) return;
   loading.value = true;
   error.value = null;
@@ -173,16 +166,21 @@ async function submitForm() {
   formData.append("description", form.value.description);
 
   form.value.images.forEach((file, index) => {
-    console.log('file images', file)
+    console.log("file images", file);
     formData.append("images[]", file);
   });
 
   try {
-    const { data } = await axiosInstance.post("/products", formData);
+    const { data } = await apiService.postMidia("/products", formData);
 
-    console.log(data);
+    alert("Produto Cadastrado com sucesso!");
+    router.push("/dashboard");
   } catch (error) {
-    console.log(error);
+    if (error?.response?.status == 401) {
+      alert("Sua sessão expirou, por favor faça login novamente!");
+      router.push("/login");
+    }
+    alert("Houve algum erro inexperado, tente novamente mais tarde.");
   }
 }
 </script>

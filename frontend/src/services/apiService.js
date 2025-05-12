@@ -26,7 +26,7 @@ class ApiService {
     }
 
     async put(url, data) {
-        const response = await http.puts(url, data, {
+        const response = await http.put(url, data, {
             headers: {
                 Authorization: `Bearer ${this.token}`
             }

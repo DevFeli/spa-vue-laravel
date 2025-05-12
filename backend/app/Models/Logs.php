@@ -24,6 +24,11 @@ class Logs extends Model
         'product_id',
         'action',
         'route',
-        'error',
+        'error', 
+        'model_type',
+        'model_id',
+        'old_values',
+        'new_values',
+        'user_id'
     ];
 }

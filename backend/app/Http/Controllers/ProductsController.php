@@ -18,7 +18,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::paginate(10);
+        $products = Products::with('images')->paginate(10);
         return response()->json($products);
     }
 
@@ -45,7 +45,7 @@ class ProductsController extends Controller
                 $url = asset(Storage::url($path));
 
                 ProductImages::create([
-                    'product_id' => 1,
+                    'product_id' => $product->id,
                     'image_path' => $path,
                     'url' => $url,
                 ]);
@@ -95,9 +95,15 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request)
     {
-        //
+        $product = Products::where('id', $request->id)->first();
+
+        if($product){
+            $product->update(['is_active' => $request->is_active]);
+            return response()->json($product, 200);
+        }
+        return response()->json(['message' => 'Produto não encontrado'], 404);
     }
 
     /**
