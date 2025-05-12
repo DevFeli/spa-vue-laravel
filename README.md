@@ -70,6 +70,8 @@ docker exec -it vue_frontend bash
 # Instale as dependências
 npm install
 
+```
+
 🧾 Funcionalidades
 
 Listagem de produtos
