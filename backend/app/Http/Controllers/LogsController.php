@@ -15,7 +15,8 @@ class LogsController extends Controller
      */
     public function index()
     {
-        //
+        $logs = Logs::paginate(10);
+        return response()->json($logs,200);
     }
 
     /**

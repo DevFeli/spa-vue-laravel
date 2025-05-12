@@ -19,6 +19,30 @@ const router = createRouter({
       }
     },
     {
+      path: '/users',
+      name: 'user',
+      component: () => import('../views/UsersView.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/users/create',
+      name: 'user-create',
+      component: () => import('../views/CreateUsersView.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/users/edit',
+      name: 'user-edit',
+      component: () => import('../views/EditUsersView.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
       path: '/products/create',
       name: 'product-create',
       component: () => import('../views/CreateProductView.vue'),
@@ -30,6 +54,14 @@ const router = createRouter({
       path: '/products/edit',
       name: 'product-edit',
       component: () => import('../views/EditProductView.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/logs',
+      name: 'logs',
+      component: () => import('../views/LogsView.vue'),
       meta: {
         auth: true
       }

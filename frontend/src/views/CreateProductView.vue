@@ -153,7 +153,7 @@ function sanitizeHtml() {
 }
 
 async function submitForm() {
-  console.log("Imagens:", form.value.images);
+
   if (!handleValidatePrice()) return;
   loading.value = true;
   error.value = null;

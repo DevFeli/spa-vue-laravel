@@ -9,6 +9,16 @@
       >
         Dashboard
       </router-link>
+      <router-link to="/users"
+        class="px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-900 transition duration-200 font-semibold"
+      >
+        Usuários
+      </router-link>
+      <router-link to="/logs"
+        class="px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-900 transition duration-200 font-semibold"
+      >
+        Logs
+      </router-link>
       <button
         @click="logout"
         class="px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-900 transition duration-200 font-semibold"
