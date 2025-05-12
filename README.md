@@ -197,7 +197,8 @@ Middleware de autenticação protegendo rotas privadas
 Senhas com hash seguro (bcrypt)
 
 🧪 Testes
-Testes unitários com PHPUnit
+Testes unitários com PHPUnit (necessário usuário padrão)
+*obs Os testes não contemplam todo o aplicativo devido ao curto espaço de tempo
 
 Validação de regras de negócio
 
@@ -206,3 +207,8 @@ Para rodar:
 docker exec -it laravel_app bash
 php artisan test --env=testing
 ```
+#Pontos a melhorar
+FrontEnd
+
+Algumas funções se repetiram em componentes portanto devem ser encapsuladas em services para que não se repitam respeitando o padrão DRY (Don't Repeat Yourself)
+Alguns componentes poderiam ser mais genéricos para serem reapriveitados.
