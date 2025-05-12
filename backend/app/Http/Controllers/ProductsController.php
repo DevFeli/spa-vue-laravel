@@ -29,7 +29,6 @@ class ProductsController extends Controller
      */
     public function create(Request $request)
     {
-        return $request;
         $descriptionSanitize = Purifier::clean($request->input('description'), 'custom');
 
         $product = Products::create([
@@ -40,13 +39,13 @@ class ProductsController extends Controller
             'is_active' => true,
         ]);
 
-        if($request->file){
+        if($request->file('images')){
             foreach ($request->file('images', []) as $imagem) {
                 $path = $imagem->store('produtos', 'public');
                 $url = asset(Storage::url($path));
 
                 ProductImages::create([
-                    'product_id' => $product->id,
+                    'product_id' => 1,
                     'image_path' => $path,
                     'url' => $url,
                 ]);

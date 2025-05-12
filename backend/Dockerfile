@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # # Ajusta limites de upload diretamente no PHP
-# RUN echo "upload_max_filesize=10M\npost_max_size=12M" > /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "upload_max_filesize=10M\npost_max_size=12M" > /usr/local/etc/php/conf.d/uploads.ini
 
 # Instala o Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -27,6 +27,11 @@ WORKDIR /var/www
 
 # Copia os arquivos
 COPY . .
+
+# # Permissões
+# RUN mkdir -p /var/www/storage/framework/cache/data \
+#  && chmod -R 775 /var/www/storage /var/www/bootstrap/cache \
+#  && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 # Instala dependências do Laravel
 RUN composer install

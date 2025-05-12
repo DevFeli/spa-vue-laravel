@@ -23,8 +23,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
+Route::get('/products', [ProductsController::class, 'index']);
+Route::post('/products', [ProductsController::class, 'create']);
 Route::middleware('auth:api')->group(function () {
-    Route::get('/products', [ProductsController::class, 'index']);
-    Route::post('/products', [ProductsController::class, 'create']);
 });
 

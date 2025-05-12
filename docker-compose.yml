@@ -12,7 +12,12 @@ services:
       - mysql
     networks:
       - app-network
-
+    command: >
+      sh -c "
+        chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache &&
+        chmod -R 775 /var/www/storage /var/www/bootstrap/cache &&
+        php-fpm
+      "
   # Serviço do Nginx
   nginx:
     image: nginx:stable-alpine
